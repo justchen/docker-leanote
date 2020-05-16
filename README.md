@@ -6,6 +6,24 @@
 
 - [English](./README-EN.md)
 
+
+# add by justchen
+原始包中没有`wkhtmltopdf`插件，修改了Dockerfile安装相关依赖。
+默认没有中文字体。推荐用以下命令安装 
+```
+docker run --name leanote \
+ -v `pwd`/db:/data/db \
+ -v `pwd`/conf/:/data/leanote/conf \
+ -v `pwd`/files:/data/leanote/files \
+ -v `pwd`/fonts:/usr/share/fonts/truetype \
+ -p 9000:9000 \
+justchen/leanote
+```
+添加了fonts映射，可以根据自已实际情况添加字体，这就不集成到dockerfile脚本里了
+
+
+# 以下是原始信息
+
 镜像提供内置数据库和无数据库版，内置数据库基于mongo:3.2构建，蚂蚁笔记所需数据都已初始化完毕，非内置数据库启动后需修改数据配置再重启。
 
 _内置数据库，容器内多进程非Docker推荐做法，只为方便。_
