@@ -1,6 +1,16 @@
 #!/bin/bash
 
-mongod &
+#init mongodb
+. /etc/profile
+mongod --dbpath  /data/db &
+
+#loop until db start
+while :
+do
+   netstat -ntlup | grep -w 27017
+   [ $? -eq 0 ] && break
+done
+
 
 if [ ! -f "/data/db/do_not_delete" ]; then
 	echo "Initial mongo data"
@@ -10,7 +20,7 @@ if [ ! -f "/data/db/do_not_delete" ]; then
 fi
 
 cp -n -r /root/leanote /data/
-rm -rf /root/leanote/*
+#rm -rf /root/leanote/*
 
 echo `date "+%Y-%m-%d %H:%M:%S"`' >>>>>> start leanote service'
 /data/leanote/bin/run.sh

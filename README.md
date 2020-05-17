@@ -8,8 +8,11 @@
 
 
 # add by justchen
+根据ubuntu16.04进行制作。mongodb版本为 4.0.10
 原始包中没有`wkhtmltopdf`插件，修改了Dockerfile安装相关依赖。
-默认没有中文字体。推荐用以下命令安装 
+默认没有中文字体。添加了fonts映射，请务必添加字体到字体文件夹，不然中文乱码，这就不集成到dockerfile脚本里了
+
+推荐用以下命令安装 
 ```
 docker run --name leanote \
  -v `pwd`/db:/data/db \
@@ -19,7 +22,14 @@ docker run --name leanote \
  -p 9000:9000 \
 justchen/leanote
 ```
-添加了fonts映射，可以根据自已实际情况添加字体，这就不集成到dockerfile脚本里了
+
+运行完成后请自行修改对应配置文件。
+相关路径如下:
+`/usr/local/bin/wkhtmltopdf`
+`/usr/local/bin/mongodb-linux-x86_64-4.0.10/bin/mongodump`
+`/usr/local/bin/mongodb-linux-x86_64-4.0.10/bin/mongorestore`
+
+
 
 
 # 以下是原始信息
